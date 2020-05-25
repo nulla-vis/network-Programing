@@ -11,7 +11,6 @@ const urlParser = require('url');
 //initiate server creation
 const server = http.createServer((req,res)=>{
     var url = urlParser.parse(req.url);
-
     //obejct
     var responseData = {
         address : url.href,
@@ -25,8 +24,8 @@ const server = http.createServer((req,res)=>{
     var json = JSON.stringify(responseData);
     res.statusCode = 200;
     res.setHeader('Content-Type','text/plain');
-    res.end(json);
-    console.log(json);
+    // res.end(json);
+    res.end("<h1>Hello World</h1>");
 });
 
 
