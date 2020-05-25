@@ -5,6 +5,7 @@ const http = require('http');
 const hostname = '127.0.0.1';
 const port = 3000;
 const urlParser = require('url');
+const fs = require('fs');
 
 
 
@@ -20,12 +21,15 @@ const server = http.createServer((req,res)=>{
         query : url.query
     };
 
-    //convert to JSON
-    var json = JSON.stringify(responseData);
-    res.statusCode = 200;
-    res.setHeader('Content-Type','text/plain');
-    // res.end(json);
-    res.end("<h1>Hello World</h1>");
+    //file read
+    fs.readFile('index.html','utf-8',(err,data)=>{
+        res.statusCode = 200;
+        res.setHeader('Content-Type','text/html');
+
+        if(err) res.end("404 : file not found")
+        else res.end(data);
+    });
+   
 });
 
 
