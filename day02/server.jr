@@ -5,31 +5,29 @@ const http = require('http');
 const hostname = '127.0.0.1';
 const port = 3000;
 const urlParser = require('url');
-const fs = require('fs');
+const fs = require('fs'); //file read
 
-
+//PATH
+var index = "../public/html/index.html";
+var about = "../public/html/about.html";
+var portofolio = "../public/html/portofolio.html";
+var textType1 = 'html';
+var textType2 = 'plain';
 
 //initiate server creation
 const server = http.createServer((req,res)=>{
-    var url = urlParser.parse(req.url);
-    //obejct
-    var responseData = {
-        address : url.href,
-        protocol : url.protocol,
-        hostname : url.hostname,
-        path : url.path,
-        query : url.query
-    };
-
-    //file read
-    fs.readFile('index.html','utf-8',(err,data)=>{
+    fs.readFile(index,'utf-8',(err,data)=>{
         res.statusCode = 200;
-        res.setHeader('Content-Type','text/html');
-
-        if(err) res.end("404 : file not found")
-        else res.end(data);
-    });
+        res.setHeader('Content-Type',`text/${textType1}`);
    
+        if(err){
+            res.statusCode = 404;
+            res.end("file not found") ;
+        } //if error
+        else {
+            res.end(data)
+        };// if not, show the data
+    });
 });
 
 
