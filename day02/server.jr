@@ -11,11 +11,17 @@ const urlParser = require('url');
 //initiate server creation
 const server = http.createServer((req,res)=>{
     var url = urlParser.parse(req.url);
-    console.log(url);
+    var responseData = {
+        address : url.href,
+        protocol : url.protocol,
+        hostname : url.hostname,
+        path : url.path,
+        query : url.query
+    };
 
     res.statusCode = 200;
     res.setHeader('Content-Type','text/plain');
-    res.end(req.url);
+    res.end(responseData.toString());
 });
 
 
