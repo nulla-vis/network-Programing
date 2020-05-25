@@ -11,6 +11,8 @@ const urlParser = require('url');
 //initiate server creation
 const server = http.createServer((req,res)=>{
     var url = urlParser.parse(req.url);
+
+    //obejct
     var responseData = {
         address : url.href,
         protocol : url.protocol,
@@ -19,9 +21,12 @@ const server = http.createServer((req,res)=>{
         query : url.query
     };
 
+    //convert to JSON
+    var json = JSON.stringify(responseData);
     res.statusCode = 200;
     res.setHeader('Content-Type','text/plain');
-    res.end(responseData.toString());
+    res.end(json);
+    console.log(json);
 });
 
 
