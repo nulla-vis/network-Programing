@@ -1,0 +1,21 @@
+//================Create Server=======================================
+
+//required variables
+const http = require('http');
+const hostname = '127.0.0.1';
+const port = 3000;
+
+//initiate server creation
+const server = http.createServer((req,res)=>{
+    console.log(req.url);
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type','text/plain');
+    res.end(req.url);
+});
+
+
+//js listen when server is online
+server.listen(port, hostname, ()=>{
+    console.log(`Server Running at http://${hostname} : ${port}/`);
+});
